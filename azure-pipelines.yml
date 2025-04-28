@@ -1,8 +1,3 @@
-# Maven
-# Build your Java project and run tests with Apache Maven.
-# Add steps that analyze code, save build artifacts, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/java
-
 trigger:
 - master
 
@@ -10,13 +5,21 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Maven@3.9.0
-  inputs:
-    mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+# Install Maven 3.9.0 manually
+- script: |
+    wget https://archive.apache.org/dist/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz
+    tar -xvf apache-maven-3.9.0-bin.tar.gz
+    sudo mv apache-maven-3.9.0 /opt/
+    sudo ln -s /opt/apache-maven-3.9.0/bin/mvn /usr/local/bin/mvn
+    mvn --version  # Confirm the Maven version
+  displayName: 'Install Maven 3.9.0'
+
+# Run Maven build with Maven 3.9.0 using the provided options
+- script: |
+    mvn clean package -Xmx3072m \
+      -Dmaven.test.failure.ignore=false \
+      -Dmaven.test.redirectTestOutputToFile=true \
+      -DtestResultsFiles=**/surefire-reports/TEST-*.xml \
+      -Dgoal=package \
+      -DpomFile=pom.xml
+  displayName: 'Run Maven Build'
