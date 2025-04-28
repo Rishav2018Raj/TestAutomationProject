@@ -14,12 +14,13 @@ steps:
     mvn --version  # Confirm the Maven version
   displayName: 'Install Maven 3.9.0'
 
-# Run Maven build with Maven 3.9.0 using the provided options
+# Set MAVEN_OPTS to include your memory settings and run Maven build
 - script: |
-    mvn clean package -Xmx3072m \
+    export MAVEN_OPTS="-Xmx3072m"  # Set the JVM options for Maven
+    mvn clean package \
       -Dmaven.test.failure.ignore=false \
       -Dmaven.test.redirectTestOutputToFile=true \
-      -DtestResultsFiles=**/surefire-reports/TEST-*.xml \
+      -DtestResultsFiles="**/surefire-reports/TEST-*.xml" \
       -Dgoal=package \
-      -DpomFile=pom.xml
+      -f pom.xml
   displayName: 'Run Maven Build'
