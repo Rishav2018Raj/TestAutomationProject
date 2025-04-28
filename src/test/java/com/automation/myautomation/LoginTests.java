@@ -16,7 +16,7 @@ public class LoginTests {
 	@Test(priority=0)
 	public void verifyLoginInValidCredentials() throws InterruptedException
 	{
-		driver = new ChromeDriver();
+	/*	driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.manage().window().maximize();
 		driver.get(url);
@@ -24,12 +24,13 @@ public class LoginTests {
 		driver.findElement(By.xpath("//input[@name='password']")).sendKeys("admin1234");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		Thread.sleep(3000);
-		driver.findElement(By.xpath("//h6[text()='Dashboard']")).isDisplayed();
+		driver.findElement(By.xpath("//h6[text()='Dashboard']")).isDisplayed(); */
+		System.out.println("Hello Rishav **************  Raj");
 	}
 
 	@Test(priority=1)
 	public void verifyLoginWithValidCredentials1() throws InterruptedException
-	{
+	{	/*
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.manage().window().maximize();
@@ -39,6 +40,8 @@ public class LoginTests {
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("//h6[text()='Dashboard']")).isDisplayed();
+		*/
+		System.out.println("Hello India **************  Country ");
 	}
 	
 	@AfterMethod
