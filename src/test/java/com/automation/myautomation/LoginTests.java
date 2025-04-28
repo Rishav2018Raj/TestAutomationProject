@@ -47,7 +47,7 @@ public class LoginTests {
 	@AfterMethod
 	public void tearDownBrowser()
 	{
-		driver.quit();
+		//driver.quit();
 	}
 	
 }
