@@ -4,7 +4,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 steps:
-  - script: >
+  - script: |
       wget
       https://archive.apache.org/dist/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz
 
