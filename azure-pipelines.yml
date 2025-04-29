@@ -22,6 +22,6 @@ steps:
       -Dmaven.test.redirectTestOutputToFile=false \
       -DtestResultsFiles="**/surefire-reports/TEST-*.xml" \
       -Dgoal=package \
-	  -X \  # Enable verbose output (this shows full output)
+	  -X   # Enable verbose output (this shows full output)
       -f pom.xml
   displayName: 'Run Maven Build'
