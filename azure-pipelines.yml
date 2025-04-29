@@ -19,8 +19,9 @@ steps:
     export MAVEN_OPTS="-Xmx3072m"  # Set the JVM options for Maven
     mvn clean package \
       -Dmaven.test.failure.ignore=false \
-      -Dmaven.test.redirectTestOutputToFile=true \
+      -Dmaven.test.redirectTestOutputToFile=false \
       -DtestResultsFiles="**/surefire-reports/TEST-*.xml" \
       -Dgoal=package \
+	  -X \  # Enable verbose output (this shows full output)
       -f pom.xml
   displayName: 'Run Maven Build'
