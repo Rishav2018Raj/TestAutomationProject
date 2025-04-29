@@ -1,27 +1,28 @@
+---
 trigger:
-- master
-
+  - master
 pool:
   vmImage: ubuntu-latest
-
 steps:
-# Install Maven 3.9.0 manually
-- script: |
-    wget https://archive.apache.org/dist/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz
-    tar -xvf apache-maven-3.9.0-bin.tar.gz
-    sudo mv apache-maven-3.9.0 /opt/
-    sudo ln -s /opt/apache-maven-3.9.0/bin/mvn /usr/local/bin/mvn
-    mvn --version  # Confirm the Maven version
-  displayName: 'Install Maven 3.9.0'
+  - script: >
+      wget
+      https://archive.apache.org/dist/maven/maven-3/3.9.0/binaries/apache-maven-3.9.0-bin.tar.gz
 
-# Set MAVEN_OPTS to include your memory settings and run Maven build
-- script: |
-    export MAVEN_OPTS="-Xmx3072m"  # Set the JVM options for Maven
-    mvn clean package \
-      -Dmaven.test.failure.ignore=false \
-      -Dmaven.test.redirectTestOutputToFile=false \
-      -DtestResultsFiles="**/surefire-reports/TEST-*.xml" \
-      -Dgoal=package \
-	  -X   # Enable verbose output (this shows full output)
-      -f pom.xml
-  displayName: 'Run Maven Build'
+      tar -xvf apache-maven-3.9.0-bin.tar.gz
+
+      sudo mv apache-maven-3.9.0 /opt/
+
+      sudo ln -s /opt/apache-maven-3.9.0/bin/mvn /usr/local/bin/mvn
+
+      mvn --version  # Confirm the Maven version
+    displayName: Install Maven 3.9.0
+  - script: |
+      export MAVEN_OPTS="-Xmx3072m"  # Set the JVM options for Maven
+      mvn clean package \
+        -Dmaven.test.failure.ignore=false \
+        -Dmaven.test.redirectTestOutputToFile=false \
+        -DtestResultsFiles="**/surefire-reports/TEST-*.xml" \
+        -Dgoal=package \
+        -X   # Enable verbose output (this shows full output)
+        -f pom.xml
+    displayName: Run Maven Build
